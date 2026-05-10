@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A maze-solving algorithm benchmarking project. Currently a single Jupyter notebook (`maze_solvers_competition.ipynb`) that generates a random maze and visualizes 9 pathfinding algorithms side-by-side, outputting an MP4 video. The long-term goal is a standalone Python benchmarking tool that averages rankings across many generated mazes.
+A maze-solving algorithm benchmarking project. The core is an installable Python package (`src/maze_solvers/`) with a `maze-bench` CLI that generates many random mazes, runs 9 pathfinding algorithms on each, and reports aggregate rankings. A Jupyter notebook (`maze_solvers_competition.ipynb`) is kept separately for one-off side-by-side visualizations.
 
 ## Commands
 
@@ -51,6 +51,25 @@ Notes:
 - If a notebook has been recently modified, regenerate the markdown version before reading it to ensure it's up to date.
 
 ## Architecture
+
+### Package Layout
+
+```
+src/maze_solvers/
+├── maze.py          # generate_maze, build_valid_moves
+├── solvers/
+│   ├── __init__.py  # SOLVERS registry (single source of truth for algorithm list)
+│   ├── base.py      # SolverBase + generator protocol
+│   ├── astar.py     # AStarSolver, WeightedAStarSolver
+│   ├── bfs.py       # BFSSolver, BidirectionalBFSSolver
+│   ├── dfs.py       # DFSSolver, RecursiveBacktrackSolver
+│   ├── dijkstra.py  # DijkstraSolver
+│   ├── greedy.py    # GreedySolver
+│   └── wall_follower.py
+├── benchmark.py     # run_trial, aggregate, format_table
+├── cli.py           # maze-bench entry point
+└── visualize.py     # optional OpenCV video rendering (requires [viz] extra)
+```
 
 ### Grid Representation
 
