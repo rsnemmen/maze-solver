@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Package install
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+.virtual_documents/
+
+# Generated outputs
+*.mp4
+benchmark_results.txt
+
+# pytest
+.pytest_cache/

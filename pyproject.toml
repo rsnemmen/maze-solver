@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "maze-solvers"
+version = "0.1.0"
+description = "Benchmark 9 pathfinding algorithms across randomly generated mazes"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "tqdm",
+]
+
+[project.optional-dependencies]
+viz = [
+    "opencv-python",
+    "ipython",
+]
+test = [
+    "pytest",
+]
+
+[project.scripts]
+maze-bench = "maze_solvers.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

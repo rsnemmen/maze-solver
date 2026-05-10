@@ -9,14 +9,29 @@ A maze-solving algorithm benchmarking project. Currently a single Jupyter notebo
 ## Commands
 
 ```bash
-# Run the notebook interactively
+# Install the package (core benchmark, no OpenCV)
+pip install -e .
+
+# Install with video-rendering support
+pip install -e ".[viz]"
+
+# Install with test dependencies
+pip install -e ".[test]"
+
+# Run the benchmark (100 trials, 20x20 maze, writes benchmark_results.txt)
+maze-bench
+
+# Custom run
+maze-bench --trials 500 --size 30 --seed 42 --log results.txt
+
+# Run tests
+pytest -q
+
+# Run the notebook interactively (one-off visualization)
 jupyter lab maze_solvers_competition.ipynb
 
-# Execute headlessly (produces maze_showdown_mugambi.mp4 in the working directory)
+# Execute notebook headlessly (produces maze_showdown_mugambi.mp4)
 jupyter nbconvert --to notebook --execute maze_solvers_competition.ipynb
-
-# Install dependencies (if needed)
-pip install numpy opencv-python tqdm ipython jupyterlab
 ```
 
 ## Jupyter Notebook Inspection
