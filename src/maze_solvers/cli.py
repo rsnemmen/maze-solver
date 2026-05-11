@@ -22,21 +22,32 @@ def main() -> None:
 
     seeds = [args.seed + i for i in range(args.trials)]
 
-    if args.workers == 1:
-        all_trials = [
-            run_trial(args.size, s)
-            for s in tqdm(seeds, desc="Running trials", unit="maze")
-        ]
-    else:
-        all_trials = []
-        with ProcessPoolExecutor(max_workers=args.workers) as ex:
-            futures = [ex.submit(run_trial, args.size, s) for s in seeds]
-            for fut in tqdm(as_completed(futures), total=len(futures),
-                            desc="Running trials", unit="maze"):
-                all_trials.append(fut.result())
+    all_trials = []
+    try:
+        if args.workers == 1:
+            for s in tqdm(seeds, desc="Running trials", unit="maze"):
+                try:
+                    all_trials.append(run_trial(args.size, s))
+                except Exception as exc:
+                    print(f"\nWarning: trial seed={s} failed: {exc}", file=sys.stderr)
+        else:
+            with ProcessPoolExecutor(max_workers=args.workers) as ex:
+                futures = [ex.submit(run_trial, args.size, s) for s in seeds]
+                for fut in tqdm(as_completed(futures), total=len(futures),
+                                desc="Running trials", unit="maze"):
+                    try:
+                        all_trials.append(fut.result())
+                    except Exception as exc:
+                        print(f"\nWarning: a trial failed: {exc}", file=sys.stderr)
+    except KeyboardInterrupt:
+        print("\nInterrupted — computing partial results...", file=sys.stderr)
+
+    if not all_trials:
+        print("No trials completed.", file=sys.stderr)
+        return
 
     stats = aggregate(all_trials)
-    table = format_table(stats, n_trials=args.trials, maze_size=args.size)
+    table = format_table(stats, n_trials=len(all_trials), maze_size=args.size)
 
     print(table)
     with open(args.log, "w") as f:

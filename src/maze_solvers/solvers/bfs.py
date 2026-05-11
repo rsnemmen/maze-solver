@@ -24,6 +24,11 @@ class BFSSolver(SolverBase):
 
 class BidirectionalBFSSolver(SolverBase):
     def solve_generator(self):
+        if self.start == self.goal:
+            visited = np.zeros((self.rows, self.cols), bool)
+            visited[self.start] = True
+            yield {'v': visited, 'p': [self.start]}
+            return
         qs, qg = deque([self.start]), deque([self.goal])
         cfs, cfg = {self.start: None}, {self.goal: None}
         vs = np.zeros((self.rows, self.cols), bool)

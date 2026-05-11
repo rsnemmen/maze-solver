@@ -117,8 +117,6 @@ def test_all_non_wf_solvers_return_identical_path_on_perfect_maze(seed):
 @pytest.mark.parametrize("cls,name", SOLVERS)
 def test_start_equals_goal(cls, name):
     """When start == goal every solver should return a single-cell path immediately."""
-    if cls is BidirectionalBFSSolver:
-        pytest.xfail("known: BidirectionalBFS doesn't handle start==goal — returns spurious multi-cell path")
     moves = _make_moves(seed=0)
     cell = (0, 0)
     path = _run(cls, name, cell, cell, moves, seed=0)

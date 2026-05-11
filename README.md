@@ -1,6 +1,6 @@
 # Maze Solvers
 
-Benchmark 9 classical pathfinding algorithms across hundreds of randomly generated mazes to find which explores most efficiently on average.
+Benchmark 9 classical pathfinding algorithms across hundreds of randomly generated mazes to find which ones explore most efficiently on average.
 
 ## Algorithms
 
