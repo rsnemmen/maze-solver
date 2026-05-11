@@ -38,6 +38,8 @@ maze-bench
 maze-bench --trials 500 --size 30 --seed 42 --log results.txt
 ```
 
+Both entry points run trials in parallel across all CPU cores by default. Use `--workers N` to control the pool size, or `--workers 1` to run serially (useful for small trial counts where process startup overhead dominates).
+
 Example output:
 
 ```

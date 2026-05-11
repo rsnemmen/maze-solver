@@ -21,8 +21,8 @@ pip install -e ".[test]"
 # Run the benchmark (100 trials, 20x20 maze, writes benchmark_results.txt)
 maze-bench
 
-# Custom run
-maze-bench --trials 500 --size 30 --seed 42 --log results.txt
+# Custom run (parallel by default; --workers 1 for serial)
+maze-bench --trials 500 --size 30 --seed 42 --log results.txt --workers 8
 
 # Run tests
 pytest -q
