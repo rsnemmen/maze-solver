@@ -16,6 +16,8 @@ Benchmark 9 classical pathfinding algorithms across hundreds of randomly generat
 | Recursive Backtrack | No | Randomised DFS |
 | Wall Follower | No | Right-hand rule |
 
+Inspired by [this Reddit post](https://www.reddit.com/r/visualization/comments/1t90l7d/maze_solving_contest_which_method_is_fastest/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button).
+
 ## Install
 
 ```bash
@@ -64,4 +66,6 @@ pytest -q
 
 ## Visualization (optional)
 
-The notebook `maze_solvers_competition.ipynb` renders a side-by-side MP4 of all solvers on one maze. For ad-hoc use from Python, see `src/maze_solvers/visualize.py` (requires `pip install -e ".[viz]"`).
+The notebook `maze_solvers_competition.ipynb` renders a side-by-side MP4 of all solvers on one maze. Notebook copied [from here](https://github.com/zombimann/Mathematical-video-animations-and-visualization/blob/d39ad7e4143932582ce4cccdc89e3f5b7d69f417/maze_solvers_competition.ipynb).
+
+For ad-hoc use from Python, see `src/maze_solvers/visualize.py` (requires `pip install -e ".[viz]"`).
