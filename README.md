@@ -24,11 +24,17 @@ pip install -e .
 
 ## Usage
 
-```bash
-# Default: 100 trials on 20×20 mazes, results saved to benchmark_results.txt
-maze-bench
+Without installing:
 
-# Custom
+```bash
+python benchmark.py
+python benchmark.py --trials 500 --size 30 --seed 42 --log results.txt
+```
+
+Or via the installed CLI (after `pip install -e .`):
+
+```bash
+maze-bench
 maze-bench --trials 500 --size 30 --seed 42 --log results.txt
 ```
 
